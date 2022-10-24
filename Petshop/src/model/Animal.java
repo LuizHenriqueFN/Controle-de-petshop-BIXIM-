@@ -1,13 +1,14 @@
 package model;
 
-public class animal {
+public class Animal {
     private int codigo;
     private String nome;
     private String endereco;
     private String cidade;
-    
-    public animal() {}  
-    public animal(int codigo, String nome, String endereco, String cidade) {
+
+    public Animal() {}
+
+    public Animal(int codigo, String nome, String endereco, String cidade) {
         this.codigo = codigo;
         this.nome = nome;
         this.endereco = endereco;
@@ -17,6 +18,7 @@ public class animal {
     public int getCodigo() {
         return codigo;
     }
+
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -24,6 +26,7 @@ public class animal {
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -31,20 +34,22 @@ public class animal {
     public String getEndereco() {
         return endereco;
     }
+
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    
+
     public String getCidade() {
         return cidade;
     }
+
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-    
+
     @Override
     public String toString() {
-        return "animal [codigo=" + codigo + ", nome=" + nome + ", endereco=" + endereco + ", cidade=" + cidade + "]";
+        return "Animal [codigo=" + codigo + ", nome=" + nome + ", endereco=" + endereco + ", cidade=" + cidade + "]";
     }
-    
+
 }
