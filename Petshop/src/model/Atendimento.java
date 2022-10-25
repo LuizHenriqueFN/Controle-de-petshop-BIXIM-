@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Atendimento {
@@ -7,6 +8,7 @@ public class Atendimento {
     private Animal animal;
     private Servico servico;
     private Date date;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
 
     public Atendimento() {}
     public Atendimento(int codigo, Date date) {
@@ -41,7 +43,7 @@ public class Atendimento {
 
     @Override
     public String toString() {
-        return "Atendimento - Código: " + codigo + ", Animal: " + animal + ", Servico: " + servico + ", Data: " + date;
+        return "Atendimento - Código: " + codigo + ", Animal: " + animal.getCodigo() + ", Servico: " + servico.getCodigo() + ", Data: " + sdf.format(date);
     }
     
 }

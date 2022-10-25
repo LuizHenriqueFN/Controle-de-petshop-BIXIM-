@@ -2,12 +2,14 @@ package visao;
 
 import java.io.IOException;
 
-import dao.AnimalDAO;
 import dao.AtendimentoDAO;
 import dao.ServicoDAO;
 import model.Animal;
 import model.Atendimento;
 import model.Servico;
+import service.AnimalService;
+import service.AtendimentoService;
+import service.ServicoService;
 import util.Login;
 import util.Util;
 
@@ -74,8 +76,8 @@ public class Menus {
 
     public static void menuAnimal() {
         int opcao;
-        AnimalDAO animalDAO = new AnimalDAO();
         Animal animal = new Animal();
+        AnimalService animalService = new AnimalService();
 
         limpaConsole();
         do {
@@ -95,6 +97,7 @@ public class Menus {
                     limpaConsole();
                     return;
                 case 1:
+                    animal = new Animal();
                     limpaConsole();
                     System.out.println(
                         "\n\t=================="+
@@ -114,8 +117,8 @@ public class Menus {
                     System.out.print("\nCidade do animal: ");
                     animal.setCidade(Util.leString());
 
-                    if(animalDAO.inserir(animal)) System.out.println("\nDados inseridos com sucesso");
-                    else System.out.println("\nERRO! Espaço insuficiente.");
+                    if(animalService.inserir(animal))System.out.println("\nDados inseridos com sucesso");
+                    else System.out.println("\nERRO! Espaço insuficiente");
                     break;
                 case 2:
                     limpaConsole();
@@ -126,10 +129,11 @@ public class Menus {
                     );
 
                     System.out.print("\nInforme o código do animal que será deletado: ");
-                    if(animalDAO.remover(Util.leInteiro()))System.out.println("\nDados deletados com sucesso");
+                    if(animalService.remover(Util.leInteiro()))System.out.println("\nDados deletados com sucesso");
                     else System.out.println("\nERRO! Dados não encontrados");
                     break;
                 case 3:
+                    animal = new Animal();
                     int codigo;
                     limpaConsole();
                     System.out.println(
@@ -152,7 +156,7 @@ public class Menus {
                     System.out.print("Nova cidade do animal: ");
                     animal.setCidade(Util.leString());
 
-                    if(animalDAO.alterar(codigo, animal)) System.out.println("\nDados alterados com sucesso");
+                    if(animalService.alterar(codigo, animal)) System.out.println("\nDados alterados com sucesso");
                     else System.out.println("\nERRO! Dados não encontrados");
                     break;
                 default:
@@ -167,7 +171,7 @@ public class Menus {
     public static void menuServicos() {
         int opcao;
         Servico servico = new Servico();
-        ServicoDAO servicoDAO = new ServicoDAO();
+        ServicoService servicoService = new ServicoService();
 
         limpaConsole();
         do {
@@ -203,7 +207,7 @@ public class Menus {
                     System.out.print("\nValor do serviço: ");
                     servico.setValor(Util.leFloat());
 
-                    if(servicoDAO.inserir(servico))System.out.println("\nDados inseridos com sucesso");
+                    if(servicoService.inserir(servico))System.out.println("\nDados inseridos com sucesso");
                     else System.out.println("\nERRO! Espaço insuficiente.");
                     break;
                 case 2:
@@ -215,7 +219,7 @@ public class Menus {
                     );
 
                     System.out.print("\nInforme o código do serviço que será deletado: ");
-                    if(servicoDAO.remover(Util.leInteiro()))System.out.println("\nDados deletados com sucesso");
+                    if(servicoService.remover(Util.leInteiro()))System.out.println("\nDados deletados com sucesso");
                     else System.out.println("\nERRO! Dados não encontrados");
                     break;
                 case 3:
@@ -238,7 +242,7 @@ public class Menus {
                     System.out.print("Novo valor do serviço: ");
                     servico.setValor(Util.leFloat());
 
-                    if(servicoDAO.alterar(codigo, servico)) System.out.println("\nDados alterados com sucesso");
+                    if(servicoService.alterar(codigo, servico)) System.out.println("\nDados alterados com sucesso");
                     else System.out.println("\nERRO! Dados não encontrados");
                     break;
                 default:
@@ -251,9 +255,9 @@ public class Menus {
 
     public static void menuAtendimentos(){
         Atendimento atendimento = new Atendimento();
-        AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
-        AnimalDAO animalDAO = new AnimalDAO();
-        ServicoDAO servicoDAO = new ServicoDAO();
+        AtendimentoService atendimentoService = new AtendimentoService();
+        AnimalService animalService = new AnimalService();
+        ServicoService servicoService = new ServicoService();
 
         System.out.println(
             "\n\t=========================="+
@@ -265,22 +269,21 @@ public class Menus {
         atendimento.setCodigo(Util.leInteiro());
 
         System.out.print("\nCódigo do animal: ");
-        atendimento.setAnimal(animalDAO.getAnimal(Util.leInteiro()));
+        atendimento.setAnimal(animalService.getAnimal(Util.leInteiro()));
         
         System.out.print("\nCódigo do serviço: ");
-        atendimento.setServico(servicoDAO.getServico(Util.leInteiro()));
+        atendimento.setServico(servicoService.getServico(Util.leInteiro()));
         
         System.out.print("\nData do atendimento: ");
         atendimento.setDate(Util.leData());
 
-        if(atendimentoDAO.inserir(atendimento))System.out.println("\nDados inseridos com sucesso");
+        if(atendimentoService.inserir(atendimento))System.out.println("\nDados inseridos com sucesso");
         else System.out.println("\nERRO! Espaço insuficiente.");
 
     }
 
     public static void menuListagemAnimais(){
-        int i;
-        AnimalDAO animalDAO = new AnimalDAO();
+        AnimalService animalService = new AnimalService();
         System.out.println(
             "\n==============================="+
             "\nLISTAGEM DE ANIMAIS CADASTRADOS"+
@@ -289,20 +292,10 @@ public class Menus {
 
         System.out.println("Deseja realmente imprimir o relatório? (S/N)");
         if(Util.leChar() == 'S'){
-            Animal animais[] = animalDAO.getAll();
+            String animais = animalService.toString();
 
-            for (i = 0; i < animais.length; i++) {
-                if(animais[i] != null) break;
-            }
-
-            if(i == animais.length) System.out.println("\nNão existem animais cadastros no sistema!");
-            else{
-                for (i = 0; i < animais.length; i++) {
-                    if(animais[i] != null) {
-                        System.out.print(animais[i].toString());
-                    }
-                }
-            }
+            if(animais == "") System.out.println("\nNão existem animais cadastros no sistema!");
+            else System.out.println(animais);
         }
     }
 
@@ -360,5 +353,9 @@ public class Menus {
                 }
             }
         }
+    }
+
+    public static void menuNotaFiscal(){
+            
     }
 }

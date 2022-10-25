@@ -1,44 +1,66 @@
 package service;
 
-import model.Animal;
 import bd.BancoDeDados;
 import dao.AnimalDAO;
+import model.Animal;
 
 public class AnimalService {
     Animal animais[] = BancoDeDados.animais;
+    AnimalDAO animalDAO = new AnimalDAO();
 
-    // public AnimalService() {
-    //     animais = BancoDeDados.getAnimais();
-    // }
-    AnimalDAO animaldao = new AnimalDAO();
+    public AnimalService() {}
 
-    public void inserir(Animal animal) {
-        animaldao.inserir(animal);
+    private static boolean isValid(Animal animal){
+        if( animal.getCodigo() != 0     ||
+            animal.getNome() != ""      ||
+            animal.getEndereco() != ""  ||
+            animal.getCidade() != "") return true;
+
+        return false;
     }
 
-    public void alterar(int codigo, Animal animal) {
-        animaldao.alterar(codigo, animal);
+    public boolean inserir(Animal animal) {
+        if(isValid(animal) && animalDAO.inserir(animal)) return true;
+            
+        return false;
     }
 
-    public void remover(int codigo) {
-        animaldao.remover(codigo);
+    public boolean alterar(int codigo, Animal animal) {
+        if(isValid(animal) && animalDAO.alterar(codigo, animal)) return true;
+            
+        return false;
+    }
+
+    public boolean remover(int codigo) {
+        if(animalDAO.remover(codigo)) return true;
+
+        return false;
     }
 
     public void limpaDados() {
-        animaldao.limpaDados();
+        animalDAO.limpaDados();
     }
 
-    public void getAnimal(int codigo){
-        animaldao.getAnimal(codigo);
+    public Animal getAnimal(int codigo){
+        Animal animal = animalDAO.getAnimal(codigo);
+        if(animal != null) return animal;
+
+        System.out.println("ERRO! Animal não encontrado");
+        return null;
     }
 
-    public String toString(){
-        return "Nome do animal: "+ animaldao.getAnimal(0).getNome() + "\nCodigo do animal: " +
-        animaldao.getAnimal(0).getCodigo() + "\nEndereço do animal: " + animaldao.getAnimal(0).getEndereco() +
-        "\nCidade do animal: " + animaldao.getAnimal(0).getCidade();//retornando o vetor inteiro de animais
+    @Override
+    public String toString() {
+        String string = "";
+
+        for (int i = 0; i < animais.length; i++) {
+            if(animais[i] != null){
+                string += animais[i].toString();
+                string += '\n';
+            }
+        }
+
+        return string;
     }
-
-    
-
 }
 
