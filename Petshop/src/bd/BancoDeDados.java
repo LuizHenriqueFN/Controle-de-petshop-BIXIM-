@@ -6,26 +6,26 @@ import model.Servico;
 
 public class BancoDeDados {
     public static BancoDeDados bancoDeDados;
-    public static Animal animal[];
-    public static Servico servicos[];
-    public static Atendimento atendimentos[];
+    public static Animal animais[] = new Animal[10];
+    public static Servico servicos[] = new Servico[10];
+    public static Atendimento atendimentos[] = new Atendimento[20];
 
     protected BancoDeDados() {
     }
 
-    public BancoDeDados getInstance() {
+    public static BancoDeDados getInstance() {
         return bancoDeDados;
     }
 
-    public Animal[] getAnimal() {
-        return animal;
+    public static Animal[] getAnimais() {
+        return animais;
     }
 
-    public Servico[] getServicos() {
+    public static Servico[] getServicos() {
         return servicos;
     }
 
-    public Atendimento[] getAtendimentos() {
+    public static Atendimento[] getAtendimentos() {
         return atendimentos;
     }
 

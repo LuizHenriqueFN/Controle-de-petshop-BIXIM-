@@ -49,7 +49,7 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Animal [codigo=" + codigo + ", nome=" + nome + ", endereco=" + endereco + ", cidade=" + cidade + "]";
+        return "Animal: - Código: " + codigo + ", Nome: " + nome + ", Endereço: " + endereco + ", Cidade: " + cidade;
     }
 
 }

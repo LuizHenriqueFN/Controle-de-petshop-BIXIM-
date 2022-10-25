@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Atendimento {
     private int codigo;
+    private Animal animal;
+    private Servico servico;
     private Date date;
 
     public Atendimento() {}
@@ -18,7 +20,18 @@ public class Atendimento {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-    
+    public Animal getAnimal() {
+        return animal;
+    }
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+    public Servico getServico() {
+        return servico;
+    }
+    public void setServico(Servico servico) {
+        this.servico = servico;
+    }
     public Date getDate() {
         return date;
     }
@@ -28,6 +41,7 @@ public class Atendimento {
 
     @Override
     public String toString() {
-        return "Atendimento [codigo=" + codigo + ", date=" + date + "]";
+        return "Atendimento - Código: " + codigo + ", Animal: " + animal + ", Servico: " + servico + ", Data: " + date;
     }
+    
 }

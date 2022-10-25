@@ -1,6 +1,7 @@
 package util;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -78,12 +79,12 @@ public class Util {
         Scanner entrada;
         Date valor = null;
         boolean erro = true;
-        DateFormat df = DateFormat.getDateInstance();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
         while (erro) {
             try {
                 entrada = new Scanner(System.in);
                 String dtString = entrada.next();
-                valor = df.parse(dtString);
+                valor = formato.parse(dtString);
                 erro = false;
             } catch (Exception e) {
                 System.out.println("Erro ao digitar. Tente novamente.");
