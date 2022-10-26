@@ -378,9 +378,11 @@ public class Menus {
             "\n\tAtendimento de Maior Valor"+
             "\nInsira o código do animal: "
         );
+        
         Atendimento atendimento = atendimentoService.getMaiorAtendimento(Util.leInteiro());
 
-        System.out.println("RELATÓRIO - ATENDIMENTO DE MAIOR VALOR: R$"+atendimento.getServico().getValor());
+        if(atendimento != null)System.out.println("RELATÓRIO - ATENDIMENTO DE MAIOR VALOR: R$"+atendimento.getServico().getValor());
+        else System.out.println("\nNenhum atendimento cadastrado");
     }
 
     public static void relatorioMenorValorAtendimento(){
@@ -391,7 +393,8 @@ public class Menus {
         );
         Atendimento atendimento = atendimentoService.getMenorAtendimento(Util.leInteiro());
 
-        System.out.println("RELATÓRIO - ATENDIMENTO DE MENOR VALOR: R$"+atendimento.getServico().getValor());
+        if(atendimento != null)System.out.println("RELATÓRIO - ATENDIMENTO DE MENOR VALOR: R$"+atendimento.getServico().getValor());
+        else System.out.println("\nNenhum atendimento cadastrado");
     }
 
     public static void relatorioTotalValorAtendimento(){
@@ -400,8 +403,9 @@ public class Menus {
             "\n\tAtendimento de Total Valor"+
             "\nInsira o código do animal: "
         );
-
-        System.out.println("RELATÓRIO - O TOTAL DOS ATENDIMENTOS DO ANIMAL É: R$"+atendimentoService.getTotalAtendimento(Util.leInteiro()));
+        float total = atendimentoService.getTotalAtendimento(Util.leInteiro());
+        if(total != 0f)System.out.println("RELATÓRIO - O TOTAL DOS ATENDIMENTOS DO ANIMAL É: R$"+ total);
+        else System.out.println("\nNenhum atendimento cadastrado");
     }
 
     public static void relatorioAtendimentoPeriodo(){
@@ -410,7 +414,7 @@ public class Menus {
         Date date2 = new Date();
         System.out.println(
             "\n======================"+
-            "\nRELATÓRIO POR PERÍODO"+
+            "\nRELATÓRIO POR PERIODO"+
             "\n======================"
         );
         System.out.print("\nInsira a data inicial (dd/mm/aaaa): ");
