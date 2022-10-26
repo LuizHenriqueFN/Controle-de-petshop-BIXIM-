@@ -1,9 +1,8 @@
 package visao;
 
 import java.io.IOException;
+import java.util.Date;
 
-import dao.AtendimentoDAO;
-import dao.ServicoDAO;
 import model.Animal;
 import model.Atendimento;
 import model.Servico;
@@ -46,6 +45,7 @@ public class Menus {
             "\n9 - Relatório - Maior valor do atendimento do animal;"+
             "\n10- Relatório - Menor valor do atendimento do animal;"+
             "\n11- Relatório - Totalizar os atendimentos do animal;"+
+            "\n12- Relatório - Atendimento entre um período;"+
             "\nDigite zero(0) para terminar."+
             "\n=========================================================="+
             "\n> "
@@ -191,6 +191,7 @@ public class Menus {
                     limpaConsole();
                     return;
                 case 1:
+                    servico = new Servico();
                     limpaConsole();
                     System.out.println(
                         "\n\t==================="+
@@ -223,6 +224,7 @@ public class Menus {
                     else System.out.println("\nERRO! Dados não encontrados");
                     break;
                 case 3:
+                    servico = new Servico();
                     int codigo;
                     limpaConsole();
                     System.out.println(
@@ -255,6 +257,8 @@ public class Menus {
 
     public static void menuAtendimentos(){
         Atendimento atendimento = new Atendimento();
+        Animal animal;
+        Servico servico;
         AtendimentoService atendimentoService = new AtendimentoService();
         AnimalService animalService = new AnimalService();
         ServicoService servicoService = new ServicoService();
@@ -269,10 +273,12 @@ public class Menus {
         atendimento.setCodigo(Util.leInteiro());
 
         System.out.print("\nCódigo do animal: ");
-        atendimento.setAnimal(animalService.getAnimal(Util.leInteiro()));
+        animal = animalService.getAnimal(Util.leInteiro());
+        if(animal != null)atendimento.setAnimal(animal);
         
         System.out.print("\nCódigo do serviço: ");
-        atendimento.setServico(servicoService.getServico(Util.leInteiro()));
+        servico = servicoService.getServico(Util.leInteiro());
+        if(servico != null)atendimento.setServico(servico);
         
         System.out.print("\nData do atendimento: ");
         atendimento.setDate(Util.leData());
@@ -300,8 +306,7 @@ public class Menus {
     }
 
     public static void menuListagemServicos(){
-        int i;
-        ServicoDAO servicoDAO = new ServicoDAO();
+        ServicoService servicoService = new ServicoService();
         System.out.println(
             "\n================================"+
             "\nLISTAGEM DE SERVIÇOS CADASTRADOS"+
@@ -310,26 +315,15 @@ public class Menus {
 
         System.out.println("Deseja realmente imprimir o relatório? (S/N)");
         if(Util.leChar() == 'S'){
-            Servico servicos[] = servicoDAO.getAll();
+            String servicos = servicoService.toString();
 
-            for (i = 0; i < servicos.length; i++) {
-                if(servicos[i] != null) break;
-            }
-
-            if(i == servicos.length) System.out.println("\nNão existem serviços cadastros no sistema!");
-            else{
-                for (i = 0; i < servicos.length; i++) {
-                    if(servicos[i] != null) {
-                        System.out.print(servicos[i].toString());
-                    }
-                }
-            }
+            if(servicos == "") System.out.println("\nNão existem serviços cadastros no sistema!");
+            else System.out.println(servicos);
         }
     }
     
     public static void menuListagemAtendimentos(){
-        int i;
-        AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
+        AtendimentoService atendimentoService = new AtendimentoService();
         System.out.println(
             "\n===================================="+
             "\nLISTAGEM DE ATENDIMENTOS CADASTRADOS"+
@@ -338,24 +332,101 @@ public class Menus {
 
         System.out.println("Deseja realmente imprimir o relatório? (S/N)");
         if(Util.leChar() == 'S'){
-            Atendimento atendimentos[] = atendimentoDAO.getAll();
+            String atendimentos = atendimentoService.toString();
 
-            for (i = 0; i < atendimentos.length; i++) {
-                if(atendimentos[i] != null) break;
-            }
-
-            if(i == atendimentos.length) System.out.println("\nNão existem atendimentos cadastros no sistema!");
-            else{
-                for (i = 0; i < atendimentos.length; i++) {
-                    if(atendimentos[i] != null) {
-                        System.out.print(atendimentos[i].toString());
-                    }
-                }
-            }
+            if(atendimentos == "") System.out.println("\nNão existem atendimentos cadastros no sistema!");
+            else System.out.println(atendimentos);
         }
     }
 
     public static void menuNotaFiscal(){
-            
+        AtendimentoService atendimentoService = new AtendimentoService();
+        System.out.print(
+            "\n\tNOTA FISCAL"+
+            "\nInsira o código do animal: "
+        );
+
+        System.out.println(atendimentoService.getNotaFiscal(Util.leInteiro()));
+    }
+
+    public static void menuLimparBancoDeDados(){
+        // AtendimentoService atendimentoService = new AtendimentoService();
+        // Banco
+        AnimalService animalService = new AnimalService();
+        AtendimentoService atendimentoService = new AtendimentoService();
+        ServicoService servicoService = new ServicoService();
+        System.out.println(
+            "\n======================"+
+            "\nDELETAR BANCO DE DADOS"+
+            "\n======================"
+        );
+
+        System.out.println("Deseja realmente deletar o banco de dados? (S/N)");
+        if(Util.leChar() == 'S'){
+            animalService.limpaDados();
+            atendimentoService.limpaDados();
+            servicoService.limpaDados();
+
+            System.out.println("\nBanco de dados deletado com sucesso");
+        }
+    }
+
+    public static void relatorioMaiorValorAtendimento(){
+        AtendimentoService atendimentoService = new AtendimentoService();
+       
+        System.out.print(
+            "\n\tAtendimento de Maior Valor"+
+            "\nInsira o código do animal: "
+        );
+        Atendimento atendimento = atendimentoService.getMaiorAtendimento(Util.leInteiro());
+
+        System.out.println("RELATÓRIO - ATENDIMENTO DE MAIOR VALOR: R$"+atendimento.getServico().getValor());
+    }
+
+    public static void relatorioMenorValorAtendimento(){
+        AtendimentoService atendimentoService = new AtendimentoService();
+        System.out.print(
+            "\n\tAtendimento de Menor Valor"+
+            "\nInsira o código do animal: "
+        );
+        Atendimento atendimento = atendimentoService.getMenorAtendimento(Util.leInteiro());
+
+        System.out.println("RELATÓRIO - ATENDIMENTO DE MENOR VALOR: R$"+atendimento.getServico().getValor());
+    }
+
+    public static void relatorioTotalValorAtendimento(){
+        AtendimentoService atendimentoService = new AtendimentoService();
+        System.out.print(
+            "\n\tAtendimento de Total Valor"+
+            "\nInsira o código do animal: "
+        );
+
+        System.out.println("RELATÓRIO - O TOTAL DOS ATENDIMENTOS DO ANIMAL É: R$"+atendimentoService.getTotalAtendimento(Util.leInteiro()));
+    }
+
+    public static void relatorioAtendimentoPeriodo(){
+        AtendimentoService atendimentoService = new AtendimentoService();
+        Date date1 = new Date();
+        Date date2 = new Date();
+        System.out.println(
+            "\n======================"+
+            "\nRELATÓRIO POR PERÍODO"+
+            "\n======================"
+        );
+        System.out.print("\nInsira a data inicial (dd/mm/aaaa): ");
+        date1 = Util.leData();
+        System.out.print("\nInsira a data final (dd/mm/aaaa): ");
+        date2 = Util.leData();
+
+        if(date1.after(date2)){
+            limpaConsole();
+            System.out.println("ERRO! O período digitado não existe");
+            return;
+        }
+
+        String string = atendimentoService.getAtendimentoPeriodo(date1, date2);
+        if(string != null) System.out.println(string);
+        else System.out.println("\nNenhum atendimento realizado no período.");
+        
     }
 }

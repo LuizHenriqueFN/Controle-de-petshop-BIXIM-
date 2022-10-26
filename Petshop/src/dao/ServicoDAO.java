@@ -36,6 +36,7 @@ public class ServicoDAO {
         for(int i=0; i<servicos.length; i++){//percorrer todo o vetor
             if(servicos[i] != null && servicos[i].getCodigo() == codigo){//se a posição atual for o servico que procuro e se a posição já não estiver vazia
                 servicos[i]=null;//esvazio aquela posição do vetor
+                return true;
             }
         }
         return false;

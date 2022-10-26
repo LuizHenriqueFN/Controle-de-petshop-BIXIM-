@@ -35,6 +35,7 @@ public class AnimalDAO {
         for(int i=0; i<animais.length; i++){//percorrer todo o vetor
             if(animais[i] != null && animais[i].getCodigo() == codigo){//se a posição atual for o animal que procuro e se a posição já não estiver vazia
                 animais[i]=null;//esvazio aquela posição do vetor
+                return true;
             }
         }
         return false;
@@ -48,7 +49,7 @@ public class AnimalDAO {
 
     public Animal getAnimal(int codigo){
         for(int i=0; i<animais.length; i++){//percorrendo todo o vetor
-            if(animais[i].getCodigo() == codigo){//se a posição atual for o animal que procuro
+            if(animais[i] != null && animais[i].getCodigo() == codigo){//se a posição atual for o animal que procuro
                 return animais[i];//retornando animal específico que eu procurava
             }
         }

@@ -1,12 +1,11 @@
 package service;
 
 import model.Servico;
-import bd.BancoDeDados;
 import dao.ServicoDAO;
 
 public class ServicoService {
-    Servico servicos[] = BancoDeDados.servicos;
-    ServicoDAO servicodao = new ServicoDAO();
+    private ServicoDAO servicodao = new ServicoDAO();
+    private Servico servicos[] = servicodao.getAll();
 
     public ServicoService() {}
 
@@ -20,7 +19,6 @@ public class ServicoService {
 
     public boolean inserir(Servico servico) {
         if(isValid(servico) && servicodao.inserir(servico)) return true;
-
         return false;
     }
 
@@ -46,12 +44,19 @@ public class ServicoService {
         return null;
     }
 
-    public String toString(){
-        return "Nome do servico: "+ servicodao.getServico(0).getNome() + "\nCodigo do servico: " +
-        servicodao.getServico(0).getCodigo() + "\nValor do servico: " + servicodao.getServico(0).getValor();//retornando o vetor inteiro de servicos
-    }
+    @Override
+    public String toString() {
+        String string = "";
 
-    
+        for (int i = 0; i < servicos.length; i++) {
+            if(servicos[i] != null){
+                string += servicos[i].toString();
+                string += '\n';
+            }
+        }
+
+        return string;
+    }
 
 }
 

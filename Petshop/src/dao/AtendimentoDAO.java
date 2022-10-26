@@ -35,6 +35,7 @@ public class AtendimentoDAO {
         for(int i=0; i<atendimentos.length; i++){//percorrer todo o vetor
             if(atendimentos[i] != null && atendimentos[i].getCodigo() == codigo){//se a posição atual for o atendimento que procuro e se a posição já não estiver vazia
                 atendimentos[i]=null;//esvazio aquela posição do vetor
+                return true;
             }
         }
         return false;

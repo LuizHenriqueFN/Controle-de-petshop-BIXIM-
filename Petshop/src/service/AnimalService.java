@@ -1,12 +1,11 @@
 package service;
 
-import bd.BancoDeDados;
 import dao.AnimalDAO;
 import model.Animal;
 
 public class AnimalService {
-    Animal animais[] = BancoDeDados.animais;
-    AnimalDAO animalDAO = new AnimalDAO();
+    private AnimalDAO animalDAO = new AnimalDAO();
+    private Animal animais[] = animalDAO.getAll();
 
     public AnimalService() {}
 

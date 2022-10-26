@@ -43,23 +43,24 @@ public class App {
                     break;
                 case 7:
                     Menus.limpaConsole();
-
+                    Menus.menuNotaFiscal();
                     break;
                 case 8:
                     Menus.limpaConsole();
+                    Menus.menuLimparBancoDeDados();
 
                     break;
                 case 9:
                     Menus.limpaConsole();
-
+                    Menus.relatorioMaiorValorAtendimento();
                     break;
                 case 10:
                     Menus.limpaConsole();
-
+                    Menus.relatorioMenorValorAtendimento();
                     break;
                 case 11:
                     Menus.limpaConsole();
-
+                    Menus.relatorioTotalValorAtendimento();
                     break;
                 default:
                     Menus.limpaConsole();

@@ -35,6 +35,6 @@ public class Servico {
 
     @Override
     public String toString() {
-        return "Atendimento: - Código: " + codigo + ", Descrição: " + nome + ", Valor: R$" + valor;
+        return "Serviço: - Código: " + codigo + ", Descrição: " + nome + ", Valor: R$" + valor;
     }
 }

@@ -1,12 +1,14 @@
 package service;
 
 import model.Atendimento;
-import bd.BancoDeDados;
+
+import java.util.Date;
+
 import dao.AtendimentoDAO;
 
 public class AtendimentoService {
-    Atendimento atendimentos[] = BancoDeDados.atendimentos;
-    AtendimentoDAO atendimentodao = new AtendimentoDAO();
+    private AtendimentoDAO atendimentodao = new AtendimentoDAO();
+    private Atendimento atendimentos[] = atendimentodao.getAll();
 
     public AtendimentoService() {}
 
@@ -47,58 +49,118 @@ public class AtendimentoService {
         return null;
     }
 
-    // public String toString(){
-    //     return "Nome do atendimento: "+ atendimentodao.getAtendimento(0).getNome() + "\nCodigo do atendimento: " +
-    //     atendimentodao.getAtendimento(0).getCodigo() + "\nValor do atendimento: " + atendimentodao.getAtendimento(0).getValor();//retornando o vetor inteiro de atendimentos
-    // }
+    @Override
+    public String toString() {
+        String string = "";
 
-    
+        for (int i = 0; i < atendimentos.length; i++) {
+            if(atendimentos[i] != null){
+                string += atendimentos[i].toString();
+                string += '\n';
+            }
+        }
+
+        return string;
+    }
+
+    public Atendimento getMaiorAtendimento(int codAnimal){
+        float maior = 0f;
+        Atendimento atendimento = null;
+        for(int i=0; i<atendimentos.length; i++){
+            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
+                if(atendimentos[i].getServico().getValor() > maior){
+                    maior = atendimentos[i].getServico().getValor();
+                    atendimento = atendimentos[i];
+                }
+            }
+        }
+        return atendimento;
+    }
+
+    public Atendimento getMenorAtendimento(int codAnimal){
+        float menor = 100000000f;
+        Atendimento atendimento = null;
+        for(int i=0; i<atendimentos.length; i++){
+            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
+                if(atendimentos[i].getServico().getValor() < menor){
+                    menor = atendimentos[i].getServico().getValor();
+                    atendimento = atendimentos[i];
+                }
+            }
+        }
+        return atendimento;
+    }
+
+    public float getTotalAtendimento(int codAnimal){
+        float soma = 0f;
+        for(int i=0; i<atendimentos.length; i++){
+            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
+                soma+= atendimentos[i].getServico().getValor();
+            }
+        }
+        return soma;
+    }
+
+    protected String listaAtendimentos(int codAnimal){
+        String string = "";
+        for (int i = 0; i < atendimentos.length; i++) {
+            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
+                string += atendimentos[i].getAnimal().toString();
+                string += '\n';
+            }
+        }
+        return string;
+    }
+
+    public String getNotaFiscal(int codAnimal){
+        String string = "";
+        boolean existe = false;
+        //Animal: - Código: 1, Nome: animal1, Endereço: rua1, Cidade: cidade1
+        string += "\n\t==========="+"\n\tNOTA FISCAL"+"\n\t===========\n";
+
+        for (int i = 0; i < atendimentos.length; i++) {
+            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
+                string += atendimentos[i].getAnimal().toString();
+                existe = true;
+                break;
+            }
+        }
+        if(!existe) return null;
+
+        string += "\n==============="+"\n=== ATENDIMENTOS ==="+"\n===============\n";
+
+        existe = false;
+        for (int i = 0; i < atendimentos.length; i++) {
+            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
+                string += atendimentos[i].getServico().toString();
+                string += '\n';
+                existe = true;
+            }
+        }
+        if(!existe) return null;
+        
+        string += "\n===============\nTotal: R$"+ getTotalAtendimento(codAnimal) +"\n===============\n";
+
+        return string;
+
+    }
+
+    public String getAtendimentoPeriodo(Date data1, Date data2){
+        String string = "\nRELATÓRIO - ATENDIMENTO NO PERÍODO:\n";
+
+        boolean existe = false;
+        for (int i = 0; i < atendimentos.length; i++) {
+            if(atendimentos[i] != null){
+                if(data1.before(atendimentos[i].getDate()) && data2.after(atendimentos[i].getDate())){
+                    string += atendimentos[i].getServico().toString();
+                    string += '\n';
+                    existe = true;
+                }
+            }
+        }
+        if(!existe) return null;
+
+        return string;
+    }
 
 }
-
-
-
-
-// package service;
-
-// import model.Atendimento;
-// import bd.BancoDeDados;
-// import dao.AtendimentoDAO;
-
-// public class AtendimentoService {
-//     Atendimento atendimentos[] = BancoDeDados.atendimentos;
-
-//     // public AtendimentoService() {
-//     //     atendimentos = BancoDeDados.getatendimentos();
-//     // }
-//     AtendimentoDAO atendimentodao = new AtendimentoDAO();
-
-//     public void inserir(Atendimento atendimento) {
-//         atendimentodao.inserir(atendimento);
-//     }
-
-//     public void alterar(int codigo, Atendimento atendimento) {
-//         atendimentodao.alterar(codigo, atendimento);
-//     }
-
-//     public void remover(int codigo) {
-//         atendimentodao.remover(codigo);
-//     }
-
-//     public void limpaDados() {
-//         atendimentodao.limpaDados();
-//     }
-
-//     public void getAtendimento(int codigo){
-//         atendimentodao.getAtendimento(codigo);
-//     }
-
-//     public String toString(){
-//         return "Animal: "+ atendimentodao.getAtendimento(0).getAnimal() + "\nCodigo do atendimento: " +
-//         atendimentodao.getAtendimento(0).getCodigo() + "\nServiço: " + atendimentodao.getAtendimento(0).getServico();//retornando o vetor inteiro de atendimentos
-//     }
-
-    
-
-// }
-
