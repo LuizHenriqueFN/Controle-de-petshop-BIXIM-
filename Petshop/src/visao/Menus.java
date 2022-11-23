@@ -275,12 +275,14 @@ public class Menus {
         System.out.print("\nCódigo do animal: ");
         animal = animalService.getAnimal(Util.leInteiro());
         if(animal != null)atendimento.setAnimal(animal);
+        else return;
         
         System.out.print("\nCódigo do serviço: ");
         servico = servicoService.getServico(Util.leInteiro());
         if(servico != null)atendimento.setServico(servico);
+        else return;
         
-        System.out.print("\nData do atendimento: ");
+        System.out.print("\nData do atendimento(dd/MM/aaaa): ");
         atendimento.setDate(Util.leData());
 
         if(atendimentoService.inserir(atendimento))System.out.println("\nDados inseridos com sucesso");
@@ -289,6 +291,7 @@ public class Menus {
     }
 
     public static void menuListagemAnimais(){
+        char opcao;
         AnimalService animalService = new AnimalService();
         System.out.println(
             "\n==============================="+
@@ -297,7 +300,8 @@ public class Menus {
         );
 
         System.out.println("Deseja realmente imprimir o relatório? (S/N)");
-        if(Util.leChar() == 'S'){
+        opcao = Util.leChar();
+        if(opcao == 'S' || opcao == 's'){
             String animais = animalService.toString();
 
             if(animais == "") System.out.println("\nNão existem animais cadastros no sistema!");
@@ -306,6 +310,7 @@ public class Menus {
     }
 
     public static void menuListagemServicos(){
+        char opcao;
         ServicoService servicoService = new ServicoService();
         System.out.println(
             "\n================================"+
@@ -314,7 +319,8 @@ public class Menus {
         );
 
         System.out.println("Deseja realmente imprimir o relatório? (S/N)");
-        if(Util.leChar() == 'S'){
+        opcao = Util.leChar();
+        if(opcao == 'S' || opcao == 's'){
             String servicos = servicoService.toString();
 
             if(servicos == "") System.out.println("\nNão existem serviços cadastros no sistema!");
@@ -323,6 +329,7 @@ public class Menus {
     }
     
     public static void menuListagemAtendimentos(){
+        char opcao;
         AtendimentoService atendimentoService = new AtendimentoService();
         System.out.println(
             "\n===================================="+
@@ -331,7 +338,8 @@ public class Menus {
         );
 
         System.out.println("Deseja realmente imprimir o relatório? (S/N)");
-        if(Util.leChar() == 'S'){
+        opcao = Util.leChar();
+        if(opcao == 'S' || opcao == 's'){
             String atendimentos = atendimentoService.toString();
 
             if(atendimentos == "") System.out.println("\nNão existem atendimentos cadastros no sistema!");
@@ -350,8 +358,7 @@ public class Menus {
     }
 
     public static void menuLimparBancoDeDados(){
-        // AtendimentoService atendimentoService = new AtendimentoService();
-        // Banco
+        char opcao;
         AnimalService animalService = new AnimalService();
         AtendimentoService atendimentoService = new AtendimentoService();
         ServicoService servicoService = new ServicoService();
@@ -362,7 +369,8 @@ public class Menus {
         );
 
         System.out.println("Deseja realmente deletar o banco de dados? (S/N)");
-        if(Util.leChar() == 'S'){
+        opcao = Util.leChar();
+        if(opcao == 'S' || opcao == 's'){
             animalService.limpaDados();
             atendimentoService.limpaDados();
             servicoService.limpaDados();

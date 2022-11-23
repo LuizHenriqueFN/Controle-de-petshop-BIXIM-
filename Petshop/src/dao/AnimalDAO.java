@@ -4,7 +4,7 @@ import model.Animal;
 import bd.BancoDeDados;
 
 public class AnimalDAO {
-    Animal animais[] = BancoDeDados.animais;
+    Animal animais[];
 
     public AnimalDAO() {
         animais = BancoDeDados.getAnimais();

@@ -5,12 +5,15 @@ import model.Atendimento;
 import model.Servico;
 
 public class BancoDeDados {
-    public static BancoDeDados bancoDeDados;
-    public static Animal animais[] = new Animal[10];
-    public static Servico servicos[] = new Servico[10];
-    public static Atendimento atendimentos[] = new Atendimento[20];
+    private static BancoDeDados bancoDeDados;
+    private static Animal animais[];
+    private static Servico servicos[];
+    private static Atendimento atendimentos[];
 
     protected BancoDeDados() {
+        animais = new Animal[10];
+        servicos = new Servico[10];
+        atendimentos = new Atendimento[20];
     }
 
     public static BancoDeDados getInstance() {

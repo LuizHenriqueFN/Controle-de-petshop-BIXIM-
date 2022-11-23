@@ -5,7 +5,6 @@ import dao.ServicoDAO;
 
 public class ServicoService {
     private ServicoDAO servicodao = new ServicoDAO();
-    private Servico servicos[] = servicodao.getAll();
 
     public ServicoService() {}
 
@@ -46,6 +45,7 @@ public class ServicoService {
 
     @Override
     public String toString() {
+        Servico servicos[] = servicodao.getAll();
         String string = "";
 
         for (int i = 0; i < servicos.length; i++) {

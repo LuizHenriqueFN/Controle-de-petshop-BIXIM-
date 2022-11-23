@@ -4,7 +4,7 @@ import model.Servico;
 import bd.BancoDeDados;
 
 public class ServicoDAO {
-    Servico servicos[] = BancoDeDados.servicos;
+    Servico servicos[];
     
 
     public ServicoDAO() {

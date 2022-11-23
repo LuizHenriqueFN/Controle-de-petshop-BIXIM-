@@ -5,7 +5,6 @@ import model.Animal;
 
 public class AnimalService {
     private AnimalDAO animalDAO = new AnimalDAO();
-    private Animal animais[] = animalDAO.getAll();
 
     public AnimalService() {}
 
@@ -50,6 +49,7 @@ public class AnimalService {
 
     @Override
     public String toString() {
+        Animal animais[] = animalDAO.getAll();
         String string = "";
 
         for (int i = 0; i < animais.length; i++) {

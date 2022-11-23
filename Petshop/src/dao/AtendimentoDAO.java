@@ -4,7 +4,7 @@ import model.Atendimento;
 import bd.BancoDeDados;
 
 public class AtendimentoDAO {
-    Atendimento atendimentos[] = BancoDeDados.atendimentos;
+    Atendimento atendimentos[];
 
     public AtendimentoDAO() {
         atendimentos = BancoDeDados.getAtendimentos();
