@@ -49,7 +49,7 @@ public class AnimalService {
 
     @Override
     public String toString() {
-        Animal animais[] = animalDAO.getAll();
+        Object animais[] = animalDAO.getAll().toArray();
         String string = "";
 
         for (int i = 0; i < animais.length; i++) {

@@ -3,12 +3,15 @@ package service;
 import model.Atendimento;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 
 import dao.AtendimentoDAO;
 
 public class AtendimentoService {
     private AtendimentoDAO atendimentodao = new AtendimentoDAO();
-    private Atendimento atendimentos[] = atendimentodao.getAll();
+    private Set<Atendimento> atendimentos = atendimentodao.getAll();
+    private Iterator<Atendimento> I;
 
     public AtendimentoService() {}
 
@@ -51,13 +54,14 @@ public class AtendimentoService {
 
     @Override
     public String toString() {
+        Atendimento atendimento;
         String string = "";
+        I = atendimentos.iterator();
 
-        for (int i = 0; i < atendimentos.length; i++) {
-            if(atendimentos[i] != null){
-                string += atendimentos[i].toString();
-                string += '\n';
-            }
+        while(I.hasNext()){
+            atendimento = I.next();
+            string += atendimento.toString();
+            string += '\n';
         }
 
         return string;
@@ -66,12 +70,17 @@ public class AtendimentoService {
     public Atendimento getMaiorAtendimento(int codAnimal){
         float maior = 0f;
         Atendimento atendimento = null;
-        for(int i=0; i<atendimentos.length; i++){
-            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
-                if(atendimentos[i].getServico().getValor() > maior){
-                    maior = atendimentos[i].getServico().getValor();
-                    atendimento = atendimentos[i];
-                }
+        Atendimento aux = null;
+        I = atendimentos.iterator();
+
+        while(I.hasNext()){
+            aux = I.next();
+            if(
+                aux.getAnimal().getCodigo() == codAnimal &&
+                aux.getServico().getValor() > maior
+            ){
+                maior = aux.getServico().getValor();
+                atendimento = aux;
             }
         }
         return atendimento;
@@ -80,22 +89,32 @@ public class AtendimentoService {
     public Atendimento getMenorAtendimento(int codAnimal){
         float menor = 100000000f;
         Atendimento atendimento = null;
-        for(int i=0; i<atendimentos.length; i++){
-            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
-                if(atendimentos[i].getServico().getValor() < menor){
-                    menor = atendimentos[i].getServico().getValor();
-                    atendimento = atendimentos[i];
-                }
+        Atendimento aux = null;
+        I = atendimentos.iterator();
+
+        while(I.hasNext()){
+            aux = I.next();
+            if(
+                aux.getAnimal().getCodigo() == codAnimal &&
+                aux.getServico().getValor() < menor
+            ){
+                menor = aux.getServico().getValor();
+                atendimento = aux;
             }
         }
+
         return atendimento;
     }
 
     public float getTotalAtendimento(int codAnimal){
         float soma = 0f;
-        for(int i=0; i<atendimentos.length; i++){
-            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
-                soma+= atendimentos[i].getServico().getValor();
+        Atendimento aux = null;
+        I = atendimentos.iterator();
+
+        while(I.hasNext()){
+            aux = I.next();
+            if(aux.getAnimal().getCodigo() == codAnimal){
+                soma += aux.getServico().getValor();
             }
         }
         return soma;
@@ -103,9 +122,13 @@ public class AtendimentoService {
 
     protected String listaAtendimentos(int codAnimal){
         String string = "";
-        for (int i = 0; i < atendimentos.length; i++) {
-            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
-                string += atendimentos[i].getAnimal().toString();
+        Atendimento atendimento = null;
+        I = atendimentos.iterator();
+
+        while(I.hasNext()){
+            atendimento = I.next();
+            if(atendimento.getAnimal().getCodigo() == codAnimal){
+                string += atendimento.getAnimal().toString();
                 string += '\n';
             }
         }
@@ -115,12 +138,16 @@ public class AtendimentoService {
     public String getNotaFiscal(int codAnimal){
         String string = "";
         boolean existe = false;
-        //Animal: - Código: 1, Nome: animal1, Endereço: rua1, Cidade: cidade1
+        Atendimento atendimento = null;
+        I = atendimentos.iterator();
+
         string += "\n\t==========="+"\n\tNOTA FISCAL"+"\n\t===========\n";
 
-        for (int i = 0; i < atendimentos.length; i++) {
-            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
-                string += atendimentos[i].getAnimal().toString();
+        while(I.hasNext()){
+            atendimento = I.next();
+            if(atendimento.getAnimal().getCodigo() == codAnimal){
+                string += atendimento.getAnimal().toString();
+                string += '\n';
                 existe = true;
                 break;
             }
@@ -130,11 +157,16 @@ public class AtendimentoService {
         string += "\n==============="+"\n=== ATENDIMENTOS ==="+"\n===============\n";
 
         existe = false;
-        for (int i = 0; i < atendimentos.length; i++) {
-            if(atendimentos[i] != null && atendimentos[i].getAnimal().getCodigo() == codAnimal){
-                string += atendimentos[i].getServico().toString();
+        atendimento = null;
+        I = atendimentos.iterator();
+
+        while(I.hasNext()){
+            atendimento = I.next();
+            if(atendimento.getAnimal().getCodigo() == codAnimal){
+                string += atendimento.getServico().toString();
                 string += '\n';
                 existe = true;
+                break;
             }
         }
         if(!existe) return null;
@@ -142,25 +174,25 @@ public class AtendimentoService {
         string += "\n===============\nTotal: R$"+ getTotalAtendimento(codAnimal) +"\n===============\n";
 
         return string;
-
     }
 
     public String getAtendimentoPeriodo(Date data1, Date data2){
         String string = "\nRELATÓRIO - ATENDIMENTO NO PERÍODO:\n";
-
+        Atendimento atendimento = null;
+        I = atendimentos.iterator();
         boolean existe = false;
-        for (int i = 0; i < atendimentos.length; i++) {
-            if(atendimentos[i] != null){
-                if(data1.before(atendimentos[i].getDate()) && data2.after(atendimentos[i].getDate())){
-                    string += atendimentos[i].getServico().toString();
-                    string += '\n';
-                    existe = true;
-                }
+
+        while(I.hasNext()){
+            atendimento = I.next();
+
+            if(data1.before(atendimento.getDate()) && data2.after(atendimento.getDate())){
+                string += atendimento.getServico().toString();
+                string += '\n';
+                existe = true;
             }
         }
         if(!existe) return null;
 
         return string;
     }
-
 }

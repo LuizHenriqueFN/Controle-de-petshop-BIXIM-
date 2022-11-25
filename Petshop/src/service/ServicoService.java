@@ -45,7 +45,7 @@ public class ServicoService {
 
     @Override
     public String toString() {
-        Servico servicos[] = servicodao.getAll();
+        Object servicos[] = servicodao.getAll().toArray();
         String string = "";
 
         for (int i = 0; i < servicos.length; i++) {

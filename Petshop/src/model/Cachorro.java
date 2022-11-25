@@ -19,7 +19,7 @@ public class Cachorro extends Animal{
 
     @Override
     public String toString() {
-        return "Cachorro [perdigree=" + perdigree + "]";
+        return "Cachorro: - perdigree: " + perdigree;
     }
 
     public float getTaxa(){

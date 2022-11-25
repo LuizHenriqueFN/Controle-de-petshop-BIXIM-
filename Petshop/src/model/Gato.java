@@ -34,7 +34,7 @@ public class Gato extends Animal {
 
     @Override
     public String toString() {
-        return "Gato [numeroDocumento=" + numeroDocumento + ", tipo=" + tipo + "]";
+        return "Gato: - Número Documento: " + numeroDocumento + ", tipo: " + tipo;
     }
     
     
