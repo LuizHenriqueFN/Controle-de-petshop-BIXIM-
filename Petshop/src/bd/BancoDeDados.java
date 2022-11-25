@@ -1,35 +1,39 @@
 package bd;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import model.Animal;
 import model.Atendimento;
 import model.Servico;
 
 public class BancoDeDados {
     private static BancoDeDados bancoDeDados;
-    private static Animal animais[];
-    private static Servico servicos[];
-    private static Atendimento atendimentos[];
+    private static Set<Animal> animais;
+    private static Set<Servico> servicos;
+    private static Set<Atendimento> atendimentos;
 
     protected BancoDeDados() {
-        animais = new Animal[10];
-        servicos = new Servico[10];
-        atendimentos = new Atendimento[20];
+        animais = new HashSet<>();
+        servicos = new HashSet<>();
+        atendimentos = new HashSet<>();
     }
 
     public static BancoDeDados getInstance() {
         return bancoDeDados;
     }
 
-    public static Animal[] getAnimais() {
+    public static Set<Animal> getAnimais() {
         return animais;
     }
 
-    public static Servico[] getServicos() {
+    public static Set<Servico> getServicos() {
         return servicos;
     }
 
-    public static Atendimento[] getAtendimentos() {
+    public static Set<Atendimento> getAtendimentos() {
         return atendimentos;
     }
 
+    
 }

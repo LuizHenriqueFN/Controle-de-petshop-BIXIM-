@@ -1,30 +1,34 @@
 package dao;
 
 import model.Atendimento;
+
+import java.util.Iterator;
+import java.util.Set;
+
 import bd.BancoDeDados;
 
 public class AtendimentoDAO {
-    Atendimento atendimentos[];
+    private Set<Atendimento> atendimentos;
+    private Iterator<Atendimento> I;
 
     public AtendimentoDAO() {
         atendimentos = BancoDeDados.getAtendimentos();
+        I = atendimentos.iterator();
     }
-
+    
     public boolean inserir(Atendimento atendimento) {
-            for(int i=0; i<atendimentos.length; i++){//percorrer todo o vetor
-                if(atendimentos[i] == null){//se a posição atual estiver vazia
-                    atendimentos[i] = atendimento;//insere o atendimento naquela posição do vetor
-                    return true;
-                }
-            }
-        return false;
+        return atendimentos.add(atendimento);
     }
 
 
     public boolean alterar(int codigo, Atendimento atendimento) {
-        for(int i=0; i<atendimentos.length; i++){//percorrer todo o vetor
-            if(atendimentos[i].getCodigo() == codigo){//se a posição atual for o atendimento que procuro
-                atendimentos[i] = atendimento;
+        I = atendimentos.iterator();
+        Atendimento temp;
+        while(I.hasNext()){
+            temp = (Atendimento)I.next();
+            if(temp.getCodigo() == codigo){
+                atendimentos.remove(temp);
+                atendimentos.add(atendimento);
                 return true;
             }
         }
@@ -32,9 +36,12 @@ public class AtendimentoDAO {
     }
 
     public boolean remover(int codigo) {
-        for(int i=0; i<atendimentos.length; i++){//percorrer todo o vetor
-            if(atendimentos[i] != null && atendimentos[i].getCodigo() == codigo){//se a posição atual for o atendimento que procuro e se a posição já não estiver vazia
-                atendimentos[i]=null;//esvazio aquela posição do vetor
+        I = atendimentos.iterator();
+        Atendimento temp;
+        while(I.hasNext()){
+            temp = (Atendimento)I.next();
+            if(temp.getCodigo() == codigo){
+                atendimentos.remove(temp);
                 return true;
             }
         }
@@ -42,21 +49,21 @@ public class AtendimentoDAO {
     }
 
     public void limpaDados(){
-        for(int i=0; i<atendimentos.length; i++){//percorrendo todo o vetor
-            atendimentos[i] = null;//limpando o vetor
-        }
+        atendimentos.clear();
     }
 
     public Atendimento getAtendimento(int codigo){
-        for(int i=0; i<atendimentos.length; i++){//percorrendo todo o vetor
-            if(atendimentos[i].getCodigo() == codigo){//se a posição atual for o atendimento que procuro
-                return atendimentos[i];//retornando atendimento específico que eu procurava
-            }
+        I = atendimentos.iterator();
+        Atendimento atendimento;
+        while(I.hasNext()){
+            atendimento = (Atendimento)I.next();
+            if(atendimento.getCodigo() == codigo) return atendimento;
+            
         }
-		return null;
+        return null;
     }
 
-    public Atendimento[] getAll(){
+    public Set<Atendimento> getAll(){
         return atendimentos;//retornando o vetor inteiro de atendimentos
     }
 

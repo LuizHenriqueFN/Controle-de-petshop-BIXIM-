@@ -1,62 +1,65 @@
 package dao;
 
 import model.Animal;
+
+import java.util.Iterator;
+import java.util.Set;
+
 import bd.BancoDeDados;
 
 public class AnimalDAO {
-    Animal animais[];
-
+    Set<Animal> animais;
+    Iterator<Animal> i;
     public AnimalDAO() {
         animais = BancoDeDados.getAnimais();
     }
 
     public boolean inserir(Animal animal) {
-            for(int i=0; i<animais.length; i++){//percorrer todo o vetor
-                if(animais[i] == null){//se a posição atual estiver vazia
-                    animais[i] = animal;//insere o animal naquela posição do vetor
-                    return true;
-                }
-            }
-        return false;
+            return (animais.add(animal));
+        
     }
 
-
     public boolean alterar(int codigo, Animal animal) {
-        for(int i=0; i<animais.length; i++){//percorrer todo o vetor
-            if(animais[i].getCodigo() == codigo){//se a posição atual for o animal que procuro
-                animais[i] = animal;
+        Animal temp;
+          while(i.hasNext()){
+            temp = (Animal)i.next();
+            if(temp.getCodigo() == codigo){
+                animais.remove(temp);
+                animais.add(animal);
                 return true;
             }
-        }
-        return false;
+          }
+          return false;
     }
 
     public boolean remover(int codigo) {
-        for(int i=0; i<animais.length; i++){//percorrer todo o vetor
-            if(animais[i] != null && animais[i].getCodigo() == codigo){//se a posição atual for o animal que procuro e se a posição já não estiver vazia
-                animais[i]=null;//esvazio aquela posição do vetor
+        Animal temp;
+          while(i.hasNext()){
+            temp = (Animal)i.next();
+            if(temp.getCodigo() == codigo){
+                animais.remove(temp);
                 return true;
             }
-        }
-        return false;
+          }
+          return false;
     }
 
     public void limpaDados(){
-        for(int i=0; i<animais.length; i++){//percorrendo todo o vetor
-            animais[i] = null;//limpando o vetor
-        }
+         animais.clear();
     }
 
     public Animal getAnimal(int codigo){
-        for(int i=0; i<animais.length; i++){//percorrendo todo o vetor
-            if(animais[i] != null && animais[i].getCodigo() == codigo){//se a posição atual for o animal que procuro
-                return animais[i];//retornando animal específico que eu procurava
+        Animal temp;
+          while(i.hasNext()){
+            temp = (Animal)i.next();
+            if(temp.getCodigo() == codigo){
+                return temp;
             }
-        }
+          }
 		return null;
     }
 
-    public Animal[] getAll(){
+    public Set<Animal> getAll(){
         return animais;//retornando o vetor inteiro de animais
     }
 
