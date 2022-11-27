@@ -1,39 +1,36 @@
 package bd;
 
+//declaração das importações necessárias
 import java.util.HashSet;
 import java.util.Set;
-
 import model.Animal;
 import model.Atendimento;
 import model.Servico;
 
 public class BancoDeDados {
-    private static BancoDeDados bancoDeDados;
-    private static Set<Animal> animais;
-    private static Set<Servico> servicos;
-    private static Set<Atendimento> atendimentos;
 
-    protected BancoDeDados() {
-        animais = new HashSet<>();
-        servicos = new HashSet<>();
-        atendimentos = new HashSet<>();
-    }
+	private static BancoDeDados bancoDeDados;
 
-    public static BancoDeDados getInstance() {
-        return bancoDeDados;
-    }
+	//Criando Collections para armazenar os dados:
+	private static Set<Animal> animais = new HashSet<>();
+	private static Set<Servico> servicos = new HashSet<>();
+	private static Set<Atendimento> atendimentos = new HashSet<>();
 
-    public static Set<Animal> getAnimais() {
-        return animais;
-    }
+	protected BancoDeDados() {}
 
-    public static Set<Servico> getServicos() {
-        return servicos;
-    }
+	public static BancoDeDados getInstance() {
+		return bancoDeDados;
+	}
 
-    public static Set<Atendimento> getAtendimentos() {
-        return atendimentos;
-    }
+	public static Set<Animal> getAnimais() {
+		return animais;
+	}
 
-    
+	public static Set<Servico> getServicos() {
+		return servicos;
+	}
+
+	public static Set<Atendimento> getAtendimentos() {
+		return atendimentos;
+	}
 }

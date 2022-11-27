@@ -28,13 +28,14 @@ public class Gato extends Animal {
         this.tipo = tipo;
     }
 
+    //Função que retorna a taxa extra do valor do serviço
     public float getTaxa(){
         return 0.15f;
     }
 
     @Override
     public String toString() {
-        return "Gato: - Número Documento: " + numeroDocumento + ", tipo: " + tipo;
+        return "Gato: - "+ super.toString() + ", Número Documento: " + numeroDocumento + ", tipo: " + tipo;
     }
     
     

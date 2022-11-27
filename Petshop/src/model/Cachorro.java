@@ -1,28 +1,37 @@
 package model;
 
-public class Cachorro extends Animal{
-    boolean perdigree;
+public class Cachorro extends Animal {
 
-    public Cachorro(){}
-    public Cachorro(int codigo, String nome, String endereco, String cidade, boolean perdigree) {
-        super(codigo, nome, endereco, cidade);
-        this.perdigree = perdigree;
-    }
+	boolean perdigree;
 
-    public boolean isPerdigree(){
-        return perdigree;
-    }
-    
-    public void setPerdigree(boolean perdigree) {
-        this.perdigree = perdigree;
-    }
+	public Cachorro() {}
 
-    @Override
-    public String toString() {
-        return "Cachorro: - perdigree: " + perdigree;
-    }
+	public Cachorro(
+		int codigo,
+		String nome,
+		String endereco,
+		String cidade,
+		boolean perdigree
+	) {
+		super(codigo, nome, endereco, cidade);
+		this.perdigree = perdigree;
+	}
 
-    public float getTaxa(){
-        return 0.1f;
-    }
+	public boolean isPerdigree() {
+		return perdigree;
+	}
+
+	public void setPerdigree(boolean perdigree) {
+		this.perdigree = perdigree;
+	}
+
+	@Override
+	public String toString() {
+		return "Cachorro: - " + super.toString() + ", perdigree: " + perdigree;
+	}
+
+	//Função que retorna a taxa extra do valor do serviço
+	public float getTaxa() {
+		return 0.1f;
+	}
 }

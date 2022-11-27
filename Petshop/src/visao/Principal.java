@@ -1,73 +1,78 @@
 package visao;
 
+import Menus.MenusAnimais;
+import Menus.MenusAtendimentos;
+import Menus.MenusAuxiliares;
+import Menus.MenusServicos;
 import util.Util;
 
 public class Principal {
 
     public static void main(String[] args) throws Exception {
-        Menus.logar();
+        MenusAuxiliares.logar();
 
         int opcao;
 
+        //Organização dos menus
         do {
-            Menus.menuInicio();
+            MenusAuxiliares.menuInicio();
             opcao = Util.leInteiro();
 
             switch (opcao) {
                 case 0:
-                    Menus.limpaConsole();
+                    Util.limpaConsole();
                     System.out.println("Encerrando...");
                     return;
                 case 1:
-                    Menus.limpaConsole();
-                    Menus.menuAnimal();
+                    Util.limpaConsole();
+                    MenusAnimais.menuAnimal();
                     break;
                 case 2:
-                    Menus.limpaConsole();
-                    Menus.menuServicos();
+                    Util.limpaConsole();
+                    MenusServicos.menuServicos();
                     break;
                 case 3:
-                    Menus.limpaConsole();
-                    Menus.menuAtendimentos();
+                    Util.limpaConsole();
+                    MenusAtendimentos.menuAtendimentos();
                     break;
                 case 4:
-                    Menus.limpaConsole();
-                    Menus.menuListagemAnimais();
+                    Util.limpaConsole();
+                    MenusAnimais.menuListagemAnimais();
                     break;
                 case 5:
-                    Menus.limpaConsole();
-                    Menus.menuListagemServicos();
+                    Util.limpaConsole();
+                    MenusServicos.menuListagemServicos();
                     break;
                 case 6:
-                    Menus.limpaConsole();
-                    Menus.menuListagemAtendimentos();
+                    Util.limpaConsole();
+                    MenusAtendimentos.menuListagemAtendimentos();
                     break;
                 case 7:
-                    Menus.limpaConsole();
-                    Menus.menuNotaFiscal();
+                    Util.limpaConsole();
+                    MenusAtendimentos.menuNotaFiscal();
                     break;
                 case 8:
-                    Menus.limpaConsole();
-                    Menus.menuLimparBancoDeDados();
+                    Util.limpaConsole();
+                    MenusAuxiliares.menuLimparBancoDeDados();
                     break;
                 case 9:
-                    Menus.limpaConsole();
-                    Menus.relatorioMaiorValorAtendimento();
+                    Util.limpaConsole();
+                    MenusAtendimentos.relatorioMaiorValorAtendimento();
                     break;
                 case 10:
-                    Menus.limpaConsole();
-                    Menus.relatorioMenorValorAtendimento();
+                    Util.limpaConsole();
+                    MenusAtendimentos.relatorioMenorValorAtendimento();
                     break;
                 case 11:
-                    Menus.limpaConsole();
-                    Menus.relatorioTotalValorAtendimento();
+                    Util.limpaConsole();
+                    MenusAtendimentos.relatorioTotalValorAtendimento();
                     break;
                 case 12:
-                    Menus.limpaConsole();
-                    Menus.relatorioAtendimentoPeriodo();
+                    Util.limpaConsole();
+                    MenusAtendimentos.relatorioAtendimentoPeriodo();
                     break;
                 default:
-                    Menus.limpaConsole();
+                    Util.limpaConsole();
                     System.out.println("Opção inválida!!");
                     break;
             }

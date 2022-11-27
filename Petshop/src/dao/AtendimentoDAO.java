@@ -1,70 +1,55 @@
 package dao;
 
+import bd.BancoDeDados;
+import java.util.Set;
 import model.Atendimento;
 
-import java.util.Iterator;
-import java.util.Set;
-
-import bd.BancoDeDados;
-
 public class AtendimentoDAO {
-    private Set<Atendimento> atendimentos;
-    private Iterator<Atendimento> I;
+	private Set<Atendimento> atendimentos;
 
-    public AtendimentoDAO() {
-        atendimentos = BancoDeDados.getAtendimentos();
-        I = atendimentos.iterator();
-    }
-    
-    public boolean inserir(Atendimento atendimento) {
-        return atendimentos.add(atendimento);
-    }
+	public AtendimentoDAO() {
+		atendimentos = BancoDeDados.getAtendimentos();
+	}
 
+	public boolean inserir(Atendimento atendimento) {
+		return atendimentos.add(atendimento);
+	}
 
-    public boolean alterar(int codigo, Atendimento atendimento) {
-        I = atendimentos.iterator();
-        Atendimento temp;
-        while(I.hasNext()){
-            temp = (Atendimento)I.next();
-            if(temp.getCodigo() == codigo){
-                atendimentos.remove(temp);
-                atendimentos.add(atendimento);
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean alterar(int codigo, Atendimento atendimento) {
+		for (Atendimento aux : atendimentos) {
+			if (aux.getCodigo() == codigo) {
+				atendimentos.remove(aux);
+				atendimentos.add(atendimento);
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public boolean remover(int codigo) {
-        I = atendimentos.iterator();
-        Atendimento temp;
-        while(I.hasNext()){
-            temp = (Atendimento)I.next();
-            if(temp.getCodigo() == codigo){
-                atendimentos.remove(temp);
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean remover(int codigo) {
+		for (Atendimento aux : atendimentos) {
+			if (aux.getCodigo() == codigo) {
+				atendimentos.remove(aux);
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public void limpaDados(){
-        atendimentos.clear();
-    }
+	public void limpaDados() {
+		atendimentos.clear();
+	}
 
-    public Atendimento getAtendimento(int codigo){
-        I = atendimentos.iterator();
-        Atendimento atendimento;
-        while(I.hasNext()){
-            atendimento = (Atendimento)I.next();
-            if(atendimento.getCodigo() == codigo) return atendimento;
-            
-        }
-        return null;
-    }
+	public Atendimento getAtendimento(int codigo) {
+		for (Atendimento aux : atendimentos) {
+			if (aux.getCodigo() == codigo) {
+				return aux;
+			}
+		}
+		return null;
+	}
 
-    public Set<Atendimento> getAll(){
-        return atendimentos;//retornando o vetor inteiro de atendimentos
-    }
-
+	public Set<Atendimento> getAll() {
+		return atendimentos; //retornando o vetor inteiro de atendimentos
+	}
 }

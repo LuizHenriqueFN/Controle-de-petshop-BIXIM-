@@ -1,14 +1,14 @@
 package model;
 
 public enum TipoDocumento {
-    CPF("xxx.xxx.xxx-xx"), CNPJ("XX. XXX. XXX/0001-XX");
+    CPF("CPF"), CNPJ("CNPJ");
     
-    private String tipo;
-    private TipoDocumento(String tipo) {
-        this.tipo = tipo;
+    private String documento;
+    private TipoDocumento(String documento) {
+        this.documento = documento;
     }
     
     public String getTipo() {
-        return tipo;
+        return documento;
     }
 }

@@ -1,66 +1,56 @@
 package dao;
 
+import bd.BancoDeDados;
+import java.util.Set;
 import model.Animal;
 
-import java.util.Iterator;
-import java.util.Set;
-
-import bd.BancoDeDados;
-
 public class AnimalDAO {
-    Set<Animal> animais;
-    Iterator<Animal> i;
-    public AnimalDAO() {
-        animais = BancoDeDados.getAnimais();
-    }
 
-    public boolean inserir(Animal animal) {
-            return (animais.add(animal));
-        
-    }
+	Set<Animal> animais;
 
-    public boolean alterar(int codigo, Animal animal) {
-        Animal temp;
-          while(i.hasNext()){
-            temp = (Animal)i.next();
-            if(temp.getCodigo() == codigo){
-                animais.remove(temp);
-                animais.add(animal);
-                return true;
-            }
-          }
-          return false;
-    }
+	public AnimalDAO() {
+		animais = BancoDeDados.getAnimais();
+	}
 
-    public boolean remover(int codigo) {
-        Animal temp;
-          while(i.hasNext()){
-            temp = (Animal)i.next();
-            if(temp.getCodigo() == codigo){
-                animais.remove(temp);
-                return true;
-            }
-          }
-          return false;
-    }
+	public boolean inserir(Animal animal) {
+		return animais.add(animal);
+	}
 
-    public void limpaDados(){
-         animais.clear();
-    }
+	public boolean alterar(int codigo, Animal animal) {
+		for (Animal aux : animais) {
+			if (aux.getCodigo() == codigo) {
+				animais.remove(aux);
+				animais.add(animal);
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public Animal getAnimal(int codigo){
-        Animal temp;
-          while(i.hasNext()){
-            temp = (Animal)i.next();
-            if(temp.getCodigo() == codigo){
-                return temp;
-            }
-          }
+	public boolean remover(int codigo) {
+		for (Animal aux : animais) {
+			if (aux.getCodigo() == codigo) {
+				animais.remove(aux);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void limpaDados() {
+		animais.clear();
+	}
+
+	public Animal getAnimal(int codigo) {
+		for (Animal aux : animais) {
+			if (aux.getCodigo() == codigo) {
+				return aux;
+			}
+		}
 		return null;
-    }
+	}
 
-    public Set<Animal> getAll(){
-        return animais;//retornando o vetor inteiro de animais
-    }
-
+	public Set<Animal> getAll() {
+		return animais; //retornando o vetor inteiro de animais
+	}
 }
