@@ -8,10 +8,20 @@ public class ServicoService {
 
     public ServicoService() {}
 
-    private static boolean isValid(Servico servico){
-        if( servico.getCodigo() != 0    ||
+    private boolean isValid(Servico servico){
+        if( 
+            servico.getCodigo() != 0    ||
             servico.getNome() != ""     ||
-            servico.getValor() != 0f) return true;
+            servico.getValor() != 0f
+        ) {
+            for(Servico aux : servicodao.getAll()){
+                if(servico.getCodigo() == aux.getCodigo()){
+                    System.out.println("\nCódigo já existe.");
+                    return false;
+                }
+            }
+            return true;
+        }
         
         return false;
     }

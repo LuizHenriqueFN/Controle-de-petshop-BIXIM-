@@ -52,7 +52,7 @@ public class MenusAtendimentos {
         //caso não ocorra nenhum erro ao inserir os dados para cadastrar o serviço, tal mensagem é então mostrada ao usuário
         if (atendimentoService.inserir(atendimento)) System.out.println("\nDados inseridos com sucesso");
         //caso contrário é mostrada ao usuário a mensagem de que não foi possível a inserção
-        else System.out.println("\nERRO! Espaço insuficiente.");
+        else System.out.println("\nERRO! Dados não inseridos.");
     }
     
     //Menu: 6 - Listar Atendimento cadastrado

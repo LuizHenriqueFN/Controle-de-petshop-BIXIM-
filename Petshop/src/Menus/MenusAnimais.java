@@ -4,11 +4,12 @@ import model.Cachorro;
 import model.Gato;
 import model.TipoDocumento;
 import service.AnimalService;
+import util.DocumentoException;
 import util.Util;
 
 public class MenusAnimais {
     //Menu: 1 - Cadastro de Animal
-    public static void menuAnimal() {
+    public static void menuAnimal() throws DocumentoException {
         //declaração das variáveis, objetos
         int opcao, codigo, tipo, animal;
         String nome, endereco, cidade, documento;
@@ -83,28 +84,32 @@ public class MenusAnimais {
 						else tipoDocumento = TipoDocumento.CNPJ;
 						System.out.println("\nInsira o numero do documento: ");
 						//Número do documento do dono:
-						while (true) {
 						documento = Util.leString();
-						if (Util.validar(documento, tipoDocumento)) break;
-						System.out.println("\nERRO! Insira o número do documento novamente:");
-						}
 
 						//Instanciando Gato:
-						gato =
-						new Gato(
-							codigo,
-							nome,
-							endereco,
-							cidade,
-							documento,
-							tipoDocumento
-						);
-						result = animalService.inserir(gato);
+						try{
+							if(Util.validar(documento, tipoDocumento)){
+								gato = new Gato(
+									codigo,
+									nome,
+									endereco,
+									cidade,
+									documento,
+									tipoDocumento
+								);
+								result = animalService.inserir(gato);
+							}else{
+								throw new DocumentoException(documento); 
+							}
+							
+						}catch(DocumentoException err){
+							result = false;
+						}
 					}
 					//se o resultado da inserção der certo, então obviamente os dados foram inseridos com sucesso
 					if (result) System.out.println("\nDados inseridos com sucesso");
 					//caso contrário, é mostrada ao usuário a mensagem de que não foi possivel inserir os dados
-					else System.out.println("\nERRO! Espaço insuficiente");
+					else System.out.println("\nERRO! Dados não inseridos.");
 					break;
 				case 2:
 					Util.limpaConsole();

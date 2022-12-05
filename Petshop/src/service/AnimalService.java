@@ -9,13 +9,21 @@ public class AnimalService {
 
 	public AnimalService() {}
 
-	private static boolean isValid(Animal animal) {
+	private boolean isValid(Animal animal) {
 		if (
 			animal.getCodigo() != 0 	||
 			animal.getNome() != ""  	||
 			animal.getEndereco() != ""	||
 			animal.getCidade() != ""
-		) return true;
+		){
+			for(Animal aux : animalDAO.getAll()){
+				if(aux.getCodigo() == animal.getCodigo()){
+					System.out.println("\nCódigo já existe.");
+                    return false;
+                }
+			}
+			return true;
+		}
 
 		return false;
 	}

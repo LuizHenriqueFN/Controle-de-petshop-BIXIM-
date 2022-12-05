@@ -49,7 +49,7 @@ public class MenusServicos {
 
                 if (servicoService.inserir(servico)) System.out.println(
                     "\nDados inseridos com sucesso"
-                ); else System.out.println("\nERRO! Espaço insuficiente.");
+                ); else System.out.println("\nERRO! Dados não inseridos.");
                 break;
                 case 2:
                 Util.limpaConsole();

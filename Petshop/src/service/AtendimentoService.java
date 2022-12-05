@@ -14,13 +14,21 @@ public class AtendimentoService {
 		atendimentos = atendimentodao.getAll();
 	}
 
-	private static boolean isValid(Atendimento atendimento) {
+	private boolean isValid(Atendimento atendimento) {
 		if (
 			atendimento.getCodigo() != 0 	||
 			atendimento.getAnimal() != null ||
 			atendimento.getDate() != null 	||
 			atendimento.getServico() != null
-		) return true;
+		){
+			for(Atendimento aux : atendimentos){
+				if(atendimento.getCodigo() == aux.getCodigo()){
+					System.out.println("\nCódigo já existe.");
+                    return false;
+                }
+			}
+			return true;
+		}
 
 		return false;
 	}
