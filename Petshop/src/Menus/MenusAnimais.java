@@ -75,13 +75,14 @@ public class MenusAnimais {
 					} else {
 						//Tipo do documento do dono:
 						do {
-						System.out.println("\nTipo Documento do dono: 1) CPF 2) CNPJ\n");
-						tipo = Util.leInteiro();
+							System.out.println("\nTipo Documento do dono: 1) CPF 2) CNPJ\n");
+							tipo = Util.leInteiro();
 						} while (tipo < 1 && tipo > 2);
 						//se a opção escolhida for 1, o documento escolhido é o cpf
 						if (tipo == 1) tipoDocumento = TipoDocumento.CPF;
 						//senão, o documento escolhido é o cnpj
 						else tipoDocumento = TipoDocumento.CNPJ;
+						
 						System.out.println("\nInsira o numero do documento: ");
 						//Número do documento do dono:
 						documento = Util.leString();
@@ -163,8 +164,8 @@ public class MenusAnimais {
 					} else {
 						//Tipo do documento do dono:
 						do {
-						System.out.println("\nTipo Documento do dono: 1) CPF 2) CNPJ");
-						tipo = Util.leInteiro();
+							System.out.println("\nTipo Documento do dono: 1) CPF 2) CNPJ");
+							tipo = Util.leInteiro();
 						} while (tipo < 1 && tipo > 2);
 						//se a opção escolhida for 1, o documento escolhido é o cpf
 						if (tipo == 1) tipoDocumento = TipoDocumento.CPF;
@@ -174,8 +175,8 @@ public class MenusAnimais {
 						System.out.println("\nInsira o numero do documento: ");
 						//Número do documento do dono:
 						while (true) {
-						documento = Util.leString();
-						if (Util.validar(documento, tipoDocumento)) break;
+							documento = Util.leString();
+							if (Util.validar(documento, tipoDocumento)) break;
 						}
 
 						//Instanciando Gato:

@@ -27,71 +27,71 @@ public class MenusServicos {
 
             switch (opcao) {
                 case 0:
-                Util.limpaConsole();
-                return;
+                    Util.limpaConsole();
+                    return;
                 case 1:
-                servico = new Servico();
-                Util.limpaConsole();
-                System.out.println(
-                    "\n\t===================" +
-                    "\n\tCADASTRO DE SERVIÇO" +
-                    "\n\t==================="
-                );
+                    servico = new Servico();
+                    Util.limpaConsole();
+                    System.out.println(
+                        "\n\t===================" +
+                        "\n\tCADASTRO DE SERVIÇO" +
+                        "\n\t==================="
+                    );
 
-                System.out.print("\nInsira o código do serviço: ");
-                servico.setCodigo(Util.leInteiro());
+                    System.out.print("\nInsira o código do serviço: ");
+                    servico.setCodigo(Util.leInteiro());
 
-                System.out.print("\nDescrição do serviço: ");
-                servico.setNome(Util.leString());
+                    System.out.print("\nDescrição do serviço: ");
+                    servico.setNome(Util.leString());
 
-                System.out.print("\nValor do serviço: ");
-                servico.setValor(Util.leFloat());
+                    System.out.print("\nValor do serviço: ");
+                    servico.setValor(Util.leFloat());
 
-                if (servicoService.inserir(servico)) System.out.println(
-                    "\nDados inseridos com sucesso"
-                ); else System.out.println("\nERRO! Dados não inseridos.");
-                break;
+                    if (servicoService.inserir(servico)) System.out.println(
+                        "\nDados inseridos com sucesso"
+                    ); else System.out.println("\nERRO! Dados não inseridos.");
+                    break;
                 case 2:
-                Util.limpaConsole();
-                System.out.println(
-                    "\n\t===============" +
-                    "\n\tDELETAR SERVIÇO" +
-                    "\n\t==============="
-                );
+                    Util.limpaConsole();
+                    System.out.println(
+                        "\n\t===============" +
+                        "\n\tDELETAR SERVIÇO" +
+                        "\n\t==============="
+                    );
 
-                System.out.print("\nInforme o código do serviço que será deletado: ");
-                if (servicoService.remover(Util.leInteiro())) System.out.println(
-                    "\nDados deletados com sucesso"
-                ); else System.out.println("\nERRO! Dados não encontrados");
-                break;
+                    System.out.print("\nInforme o código do serviço que será deletado: ");
+                    if (servicoService.remover(Util.leInteiro())) System.out.println(
+                        "\nDados deletados com sucesso"
+                    ); else System.out.println("\nERRO! Dados não encontrados");
+                    break;
                 case 3:
-                servico = new Servico();
-                int codigo;
-                Util.limpaConsole();
-                System.out.println(
-                    "\n\t===============" +
-                    "\n\tALTERAR SERVIÇO" +
-                    "\n\t==============="
-                );
+                    servico = new Servico();
+                    int codigo;
+                    Util.limpaConsole();
+                    System.out.println(
+                        "\n\t===============" +
+                        "\n\tALTERAR SERVIÇO" +
+                        "\n\t==============="
+                    );
 
-                System.out.print("\nInforme o código do serviço que será alterado: ");
-                codigo = Util.leInteiro();
+                    System.out.print("\nInforme o código do serviço que será alterado: ");
+                    codigo = Util.leInteiro();
 
-                servico.setCodigo(codigo);
+                    servico.setCodigo(codigo);
 
-                System.out.print("Nova descrição do serviço: ");
-                servico.setNome(Util.leString());
+                    System.out.print("Nova descrição do serviço: ");
+                    servico.setNome(Util.leString());
 
-                System.out.print("Novo valor do serviço: ");
-                servico.setValor(Util.leFloat());
+                    System.out.print("Novo valor do serviço: ");
+                    servico.setValor(Util.leFloat());
 
-                if (servicoService.alterar(codigo, servico)) System.out.println(
-                    "\nDados alterados com sucesso"
-                ); else System.out.println("\nERRO! Dados não encontrados");
-                break;
+                    if (servicoService.alterar(codigo, servico)) System.out.println(
+                        "\nDados alterados com sucesso"
+                    ); else System.out.println("\nERRO! Dados não encontrados");
+                    break;
                 default:
-                Util.limpaConsole();
-                System.out.println("Opção inválida!!");
+                    Util.limpaConsole();
+                    System.out.println("Opção inválida!!");
                 break;
             }
         } while (true);
