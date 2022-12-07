@@ -5,6 +5,7 @@ import com.example.Menus.MenusAtendimentos;
 import com.example.Menus.MenusAuxiliares;
 import com.example.Menus.MenusServicos;
 import com.example.util.DocumentoException;
+import com.example.util.Login;
 import com.example.util.Util;
 
 public class Principal {
@@ -71,6 +72,10 @@ public class Principal {
                 case 12:
                     Util.limpaConsole();
                     MenusAtendimentos.relatorioAtendimentoPeriodo();
+                    break;
+                case 13:
+                    Util.limpaConsole();
+                    MenusAuxiliares.menuLogar();
                     break;
                 default:
                     Util.limpaConsole();

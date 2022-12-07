@@ -20,7 +20,7 @@ public class MenusAuxiliares {
 		ServicoService servicoService = new ServicoService();
 		AtendimentoService atendimentoService = new AtendimentoService();
 	
-		Cachorro cachorro = new Cachorro( 1, "Jubilei", "Rua da Mandioca", "Mandioquinyha", true);
+		Cachorro cachorro = new Cachorro( 1, "Jubileu", "Rua São Luiz", "Formiga", true);
 		Servico servico = new Servico(1, "Banho", 50f);
 		Servico servico2 = new Servico(2, "Tosa", 25f);
 		Atendimento atendimento = null;
@@ -57,6 +57,7 @@ public class MenusAuxiliares {
 			"\n10- Relatório - Menor valor do atendimento do animal;" +
 			"\n11- Relatório - Totalizar os atendimentos do animal;" +
 			"\n12- Relatório - Atendimento entre um período;" +
+			"\n13- Gerenciamento de Logins;" +
 			"\nDigite zero(0) para terminar." +
 			"\n==========================================================" +
 			"\n> "
@@ -116,6 +117,88 @@ public class MenusAuxiliares {
 			//é exibida na tela a mensagem de confirmação
 			System.out.println("\nBanco de dados deletado com sucesso");
 		}
+	}
+
+	public static void menuLogar(){
+		int opcao;
+		String user, password;
+		String userAntigo, passwordAntigo;
+
+		do{
+
+			System.out.printf(
+				"\n=========== Menu de opções do Login ============" +
+				"\n1 - Inserir Login;" +
+				"\n2 - Deletar Login;" +
+				"\n3 - Alterar Login;" +
+				"\nDigite zero(0) para voltar ao menu anterior." +
+				"\n================================================" +
+				"\n> "
+			);
+			opcao = Util.leInteiro();
+
+			switch (opcao) {
+				case 0:
+					Util.limpaConsole();
+					return;
+				case 1:
+					Util.limpaConsole();
+						System.out.println(
+							"\n\t==================" +
+							"\n\t  Inserir Login" +
+							"\n\t=================="
+						);
+
+						System.out.printf("\nInsira o novo usuário(user): ");
+						user = Util.leString();
+						System.out.printf("\nInsira a nova senha(password): ");
+						password = Util.leString();
+
+						if(Login.inserirLogin(user, password))System.out.println("\nDados inseridos com sucesso!");
+						else System.out.println("\nERRO! Não foi possível inserir os dados.");
+
+					break;
+				case 2:
+					Util.limpaConsole();
+						System.out.println(
+							"\n\t==================" +
+							"\n\t  Deletar Login" +
+							"\n\t=================="
+						);
+
+						System.out.printf("\nInsira o usuário(user) que deseja deletar: ");
+						user = Util.leString();
+
+						if(Login.deletarLogin(user))System.out.println("\nDados deletados com sucesso!");
+						else System.out.println("\nERRO! Não foi possível deletar os dados.");
+
+					break;
+				case 3:
+					Util.limpaConsole();
+						System.out.println(
+							"\n\t==================" +
+							"\n\t  Alterar Login" +
+							"\n\t=================="
+						);
+						System.out.printf("\nInsira o usuário(user) que deseja alterar: ");
+						userAntigo = Util.leString();
+						System.out.printf("\nInsira a senha(password) que deseja alterar: ");
+						passwordAntigo = Util.leString();
+						System.out.printf("\nInsira o novo usuário(user): ");
+						user = Util.leString();
+						System.out.printf("\nInsira a nova senha(password): ");
+						password = Util.leString();
+
+						if(Login.alterarLogin(user, password, userAntigo, passwordAntigo))System.out.println("\nDados alterados com sucesso!");
+						else System.out.println("\nERRO! Não foi possível alterar os dados.");
+
+					break;
+				default:
+					Util.limpaConsole();
+					System.out.println("Opção inválida!!");
+				break;
+			}
+		}while(opcao != 0);
 	}
 	
 }
