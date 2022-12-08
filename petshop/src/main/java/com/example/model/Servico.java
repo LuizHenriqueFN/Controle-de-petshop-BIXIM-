@@ -3,13 +3,13 @@ package com.example.model;
 public class Servico {
     private int codigo;
     private String nome;
-    private float valor;
+    private double valor;
 
     public Servico() {}
-    public Servico(int codigo, String nome, float valor) {
+    public Servico(int codigo, String nome, double novoValor) {
         this.codigo = codigo;
         this.nome = nome;
-        this.valor = valor;
+        this.valor = novoValor;
     }
 
     public int getCodigo() {
@@ -26,11 +26,11 @@ public class Servico {
         this.nome = nome;
     }
 
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
-    public void setValor(float valor) {
-        this.valor = valor;
+    public void setValor(double d) {
+        this.valor = d;
     }
 
     @Override
@@ -43,7 +43,9 @@ public class Servico {
         int result = 1;
         result = prime * result + codigo;
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        result = prime * result + Float.floatToIntBits(valor);
+        long temp;
+        temp = Double.doubleToLongBits(valor);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
     @Override
@@ -62,10 +64,10 @@ public class Servico {
                 return false;
         } else if (!nome.equals(other.nome))
             return false;
-        if (Float.floatToIntBits(valor) != Float.floatToIntBits(other.valor))
+        if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
             return false;
         return true;
     }
-
+    
     
 }

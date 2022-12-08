@@ -71,7 +71,7 @@ public class AtendimentoService {
 	}
 
 	public Atendimento getMaiorAtendimento(int codAnimal) {
-		float maior = 0f;
+		double maior = 0.0;
 		Atendimento atendimento = null;
 		for (Atendimento aux : atendimentos) {
 			if (
@@ -86,7 +86,7 @@ public class AtendimentoService {
 	}
 
 	public Atendimento getMenorAtendimento(int codAnimal) {
-		float menor = 100000000f;
+		double menor = 100000000.0;
 		Atendimento atendimento = null;
 		for (Atendimento aux : atendimentos) {
 			if (

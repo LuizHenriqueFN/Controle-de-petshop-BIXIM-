@@ -5,13 +5,17 @@ import java.util.Set;
 import com.example.model.Atendimento;
 
 public class AtendimentoDAO {
+	
+	public static BancoDeDados bancoDeDados = new BancoDeDados();
 	private Set<Atendimento> atendimentos;
 
 	public AtendimentoDAO() {
 		atendimentos = BancoDeDados.getAtendimentos();
+		BancoDeDados.leBancoDeDados();
 	}
 
 	public boolean inserir(Atendimento atendimento) {
+		// bancoDeDados.inserirAtendimento(atendimento);
 		return atendimentos.add(atendimento);
 	}
 
@@ -22,6 +26,7 @@ public class AtendimentoDAO {
 				atendimentos.add(atendimento);
 				return true;
 			}
+			bancoDeDados.atualizarAtendimento(atendimento.getCodigo(), atendimento);
 		}
 		return false;
 	}
@@ -33,6 +38,7 @@ public class AtendimentoDAO {
 				return true;
 			}
 		}
+		bancoDeDados.removerAtendimento(codigo);
 		return false;
 	}
 
@@ -46,6 +52,7 @@ public class AtendimentoDAO {
 				return aux;
 			}
 		}
+		bancoDeDados.mostrar1(codigo);
 		return null;
 	}
 
@@ -53,3 +60,6 @@ public class AtendimentoDAO {
 		return atendimentos; //retornando o vetor inteiro de atendimentos
 	}
 }
+
+
+

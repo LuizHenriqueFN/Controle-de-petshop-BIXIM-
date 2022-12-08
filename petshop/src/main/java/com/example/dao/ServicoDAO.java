@@ -5,6 +5,7 @@ import java.util.Set;
 import com.example.model.Servico;
 
 public class ServicoDAO {
+	public static BancoDeDados bancoDeDados = new BancoDeDados();
 	Set<Servico> servicos;
 
 	public ServicoDAO() {
@@ -12,28 +13,18 @@ public class ServicoDAO {
 	}
 
 	public boolean inserir(Servico servico) {
+		bancoDeDados.inserirServico(servico);
 		return servicos.add(servico);
 	}
 
 	public boolean alterar(int codigo, Servico servico) {
-		for (Servico aux : servicos) {
-			if (aux.getCodigo() == codigo) {
-				servicos.remove(aux);
-				servicos.add(servico);
-				return true;
-			}
-		}
+		bancoDeDados.atualizarServico(codigo, servico);
 		return false;
 	}
 
 	public boolean remover(int codigo) {
-		for (Servico aux : servicos) {
-			if (aux.getCodigo() == codigo) {
-				servicos.remove(aux);
-				return true;
-			}
-		}
-		return false;
+		bancoDeDados.removerServico(codigo);
+		return true;
 	}
 
 	public void limpaDados() {
@@ -53,3 +44,6 @@ public class ServicoDAO {
 		return servicos; //retornando o vetor inteiro de atendimentos
 	}
 }
+
+
+

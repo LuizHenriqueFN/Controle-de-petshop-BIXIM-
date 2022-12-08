@@ -14,12 +14,6 @@ public class ServicoService {
             servico.getNome() != ""     ||
             servico.getValor() != 0f
         ) {
-            for(Servico aux : servicodao.getAll()){
-                if(servico.getCodigo() == aux.getCodigo()){
-                    System.out.println("\nCódigo já existe.");
-                    return false;
-                }
-            }
             return true;
         }
         

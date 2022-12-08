@@ -2,6 +2,7 @@ package com.example.Menus;
 
 import java.util.Date;
 
+import com.example.bd.BancoDeDados;
 import com.example.model.Animal;
 import com.example.model.Atendimento;
 import com.example.model.Servico;
@@ -40,7 +41,7 @@ public class MenusAtendimentos {
         aux = servicoService.getServico(Util.leInteiro());
         if (aux != null) {
             //Calculando o valor do serviço de acordo com o animal
-            float novoValor = aux.getValor() + (aux.getValor() * animal.getTaxa());
+            double novoValor = aux.getValor() + (aux.getValor() * animal.getTaxa());
             //Instanciando novo objeto para não alterar o valor padrão do serviço
             servico = new Servico(aux.getCodigo(), aux.getNome(), novoValor);
             atendimento.setServico(servico);
@@ -53,6 +54,7 @@ public class MenusAtendimentos {
         if (atendimentoService.inserir(atendimento)) System.out.println("\nDados inseridos com sucesso");
         //caso contrário é mostrada ao usuário a mensagem de que não foi possível a inserção
         else System.out.println("\nERRO! Dados não inseridos.");
+        BancoDeDados.leBancoDeDados();
     }
     
     //Menu: 6 - Listar Atendimento cadastrado

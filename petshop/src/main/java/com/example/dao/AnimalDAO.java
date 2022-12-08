@@ -5,6 +5,7 @@ import java.util.Set;
 import com.example.model.Animal;
 
 public class AnimalDAO {
+	public static BancoDeDados bancoDeDados = new BancoDeDados();
 
 	Set<Animal> animais;
 
@@ -13,28 +14,18 @@ public class AnimalDAO {
 	}
 
 	public boolean inserir(Animal animal) {
+		bancoDeDados.inserirAnimal(animal);
 		return animais.add(animal);
 	}
 
 	public boolean alterar(int codigo, Animal animal) {
-		for (Animal aux : animais) {
-			if (aux.getCodigo() == codigo) {
-				animais.remove(aux);
-				animais.add(animal);
-				return true;
-			}
-		}
-		return false;
+		bancoDeDados.atualizarAnimal(animal.getCodigo(), animal);
+		return true;
 	}
 
 	public boolean remover(int codigo) {
-		for (Animal aux : animais) {
-			if (aux.getCodigo() == codigo) {
-				animais.remove(aux);
-				return true;
-			}
-		}
-		return false;
+		bancoDeDados.removerAnimal(codigo);
+		return true;
 	}
 
 	public void limpaDados() {
@@ -54,3 +45,6 @@ public class AnimalDAO {
 		return animais; //retornando o vetor inteiro de animais
 	}
 }
+
+
+

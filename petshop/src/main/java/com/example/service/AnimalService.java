@@ -16,12 +16,6 @@ public class AnimalService {
 			animal.getEndereco() != ""	||
 			animal.getCidade() != ""
 		){
-			for(Animal aux : animalDAO.getAll()){
-				if(aux.getCodigo() == animal.getCodigo()){
-					System.out.println("\nCódigo já existe.");
-                    return false;
-                }
-			}
 			return true;
 		}
 

@@ -3,6 +3,7 @@ package com.example.Menus;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import com.example.bd.BancoDeDados;
 import com.example.model.Atendimento;
 import com.example.model.Cachorro;
 import com.example.model.Servico;
@@ -84,6 +85,7 @@ public class MenusAuxiliares {
 		//se o login for concluído (credenciais inclusas corretamente), return
 		if (Login.logar(nome, password)) {
 			geraDados();
+			BancoDeDados.leBancoDeDados();
 			return;
 		}
 

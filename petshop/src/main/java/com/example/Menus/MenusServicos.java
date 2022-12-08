@@ -1,5 +1,6 @@
 package com.example.Menus;
 
+import com.example.bd.BancoDeDados;
 import com.example.model.Servico;
 import com.example.service.ServicoService;
 import com.example.util.Util;
@@ -14,6 +15,7 @@ public class MenusServicos {
 
         Util.limpaConsole();
         do {
+            BancoDeDados.leBancoDeDados();
             System.out.printf(
                 "\n=========== Menu de opções do Serviços ===========" +
                 "\n1 - Inserir Serviço;" +

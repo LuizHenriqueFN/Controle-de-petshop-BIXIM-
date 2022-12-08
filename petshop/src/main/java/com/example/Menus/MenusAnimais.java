@@ -1,5 +1,6 @@
 package com.example.Menus;
 
+import com.example.bd.BancoDeDados;
 import com.example.model.Cachorro;
 import com.example.model.Gato;
 import com.example.model.TipoDocumento;
@@ -23,6 +24,7 @@ public class MenusAnimais {
 
         Util.limpaConsole();
         do {
+			BancoDeDados.leBancoDeDados();
 			System.out.printf(
 				"\n=========== Menu de opções do Animal ===========" +
 				"\n1 - Inserir Animal;" +
@@ -135,7 +137,7 @@ public class MenusAnimais {
 					);
 					//a fim de alterar o animal, o usuário informa o código do animal que ele deseja
 					//e todos os outros dados que compõem o animal
-					System.out.print("\nInsira seu código: ");
+					System.out.print("\nInsira o código do animal: ");
 					codigo = Util.leInteiro();
 
 					System.out.print("\nNome do animal: ");
